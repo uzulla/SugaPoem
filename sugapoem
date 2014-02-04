@@ -19,4 +19,5 @@ foreach($config['screen_name_list'] as $screen_name){
             echo " +>{$comment->screen_name}>{$comment->text}\n";
         }
     }
+    echo "==============================================================\n";
 }
