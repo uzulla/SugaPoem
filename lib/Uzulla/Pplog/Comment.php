@@ -5,7 +5,7 @@ class Comment
 {
     /** @var String */
     public $screen_name;
-    /** @var \DateTime */
+    /** @var String */
     public $text;
 
     public function __construct($screen_name, $text)
