@@ -14,7 +14,7 @@ class Post
     /** @var Comment[] */
     public $comment_list;
 
-    public function __construct($screen_name, $created_at, $title, $text, $comment_list)
+    public function __construct($screen_name, \DateTime $created_at, $title, $text, array $comment_list)
     {
         $this->screen_name = preg_replace("/[[:cntrl:][:blank:]]/u", '', $screen_name);
         $this->title = preg_replace("/[[:cntrl:][:blank:]]/u", '', $title);
