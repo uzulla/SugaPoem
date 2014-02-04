@@ -11,7 +11,7 @@
         "fabpot/goutte": "*"
     },
     "autoload": {
-        "psr-0": {"": "lib/"}
+        "psr-0": {"Uzulla\\Pplog\\": "lib/"}
     },
     "bin": [
         "sugapoem"
