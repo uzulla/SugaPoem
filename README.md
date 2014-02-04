@@ -43,6 +43,14 @@ $ vendor/bin/sugapoem
  +>Unknown>逃げるな
 ```
 
+# config.php
+
+```
+$ vendor/bin/sugapoem config.php
+```
+
+「Perlではよくあること」
+
 # 他のどうでもいい機能
 
 `\Uzulla\Pplog\Crawl`というのがなかにはいってます。
