@@ -31,7 +31,8 @@ class Crawl
         $text = null;
         $created_at_str = null;
         try{
-            $text = $c->filter("div.content h1", 0)->text();
+            $title = $c->filter("div.content h1", 0)->text();
+            $text = $c->filter("div.content .content-body", 0)->text();
             $created_at_str = $c->filter(".created-at",0)->text();
         }catch(\Exception $e){
             throw new \Exception("get fail {$screen_name}");
@@ -53,7 +54,7 @@ class Crawl
             }
         );
 
-        $post = new Post($screen_name, $date, $text, $comment_list);
+        $post = new Post($screen_name, $date, $title, $text, $comment_list);
 
         return $post;
     }
