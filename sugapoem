@@ -1,0 +1,24 @@
+#!/usr/bin/env php
+<?php
+require "vendor/autoload.php";
+
+$screen_name_list = [
+    'sugamasao',
+];
+
+foreach($screen_name_list as $screen_name){
+    try{
+        $post = \Uzulla\Pplog\Crawl::get($screen_name);
+    }catch(\Exception $e){
+        echo "get fail: {$screen_name}\n";
+        continue;
+    }
+
+    echo "{$post->created_at->format('Y/m/d H:i:s')} {$post->screen_name} > {$post->text}\n";
+
+    if(!empty($post->comment_list)){
+        foreach($post->comment_list as $comment){
+            echo " +>{$comment->screen_name}>{$comment->text}\n";
+        }
+    }
+}

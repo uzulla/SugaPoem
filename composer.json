@@ -1,0 +1,19 @@
+{
+    "name": "uzulla/sugapoem",
+    "description": "read sugamasao poem.",
+    "type": "tool",
+    "keywords": [
+        "sugamasao",
+        "contents",
+        "poem"
+    ],
+    "require":{
+        "fabpot/goutte": "*"
+    },
+    "autoload": {
+        "psr-0": {"": "lib/"}
+    },
+    "bin": [
+        "sugapoem"
+    ]
+}
