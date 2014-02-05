@@ -11,6 +11,6 @@ class Comment
     public function __construct($screen_name, $text)
     {
         $this->text = preg_replace("/[[:cntrl:][:blank:]]/u", '', $text);
-        $this->screen_name = preg_replace("/[[:cntrl:][:blank:]]/u", '', $screen_name);
+        $this->screen_name = ltrim(preg_replace("/[[:cntrl:][:blank:]]/u", '', $screen_name), '@');
     }
 }

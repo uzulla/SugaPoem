@@ -1,0 +1,23 @@
+#!/usr/bin/env php
+<?php
+set_error_handler(function($errno, $errstr, $errfile, $errline){
+    throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
+});
+
+require "vendor/autoload.php";
+
+try{
+    $post = \Uzulla\Pplog\Crawl::get();
+}catch(\Exception $e){
+    echo $e->getMessage()."\n";
+    exit;
+}
+
+echo "{$post->created_at->format('Y/m/d H:i:s')} {$post->screen_name} > {$post->title}\n{$post->text}\n";
+
+if(!empty($post->comment_list)){
+    foreach($post->comment_list as $comment){
+        echo " +>{$comment->screen_name}>{$comment->text}\n";
+    }
+}
+echo "==============================================================\n";

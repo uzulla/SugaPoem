@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "1f53f7c6d07ed48d701226eebbd23ef0",
+    "hash": "fd711641bd4b0185287e58fa12e21c06",
     "packages": [
         {
             "name": "fabpot/goutte",

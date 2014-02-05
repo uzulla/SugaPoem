@@ -4,6 +4,7 @@ namespace Uzulla\Pplog;
 class Crawl
 {
     static $pplog_user_url_prefix = 'https://www.pplog.net/u/';
+    static $pplog_zapping_url = 'https://www.pplog.net/zapping';
 
     /**
      * @param $screen_name_list string[] twitter screen_name
@@ -23,22 +24,27 @@ class Crawl
      * @return Post
      * @throws \Exception
      */
-    public static function get($screen_name)
+    public static function get($screen_name=null)
     {
         $g = new \Goutte\Client();
-        $c = $g->request('GET', static::$pplog_user_url_prefix.$screen_name);
+        try{
+            if(is_null($screen_name))
+                $c = $g->request('GET', static::$pplog_zapping_url);
+            else
+                $c = $g->request('GET', static::$pplog_user_url_prefix.$screen_name);
+        }catch(\Exception $e){
+            throw new \Exception("get html fail");
+        }
 
-        $text = null;
-        $created_at_str = null;
         try{
             $title = $c->filter("div.content h1", 0)->text();
             $text = $c->filter("div.content .content-body", 0)->text();
             $created_at_str = $c->filter(".created-at",0)->text();
+            $screen_name = $c->filter(".user-summary-left .user-name",0)->text();
+            $date = \DateTime::createFromFormat('H:i D d M Y', $created_at_str);
         }catch(\Exception $e){
-            throw new \Exception("get fail {$screen_name}");
+            throw new \Exception("parse html fail");
         }
-
-        $date = \DateTime::createFromFormat('H:i D d M Y', $created_at_str);
 
         $comment_list = [];
         $c->filter(".star-contents .star-content")->each(

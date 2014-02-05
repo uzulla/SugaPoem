@@ -1,5 +1,9 @@
 #!/usr/bin/env php
 <?php
+set_error_handler(function($errno, $errstr, $errfile, $errline){
+    throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
+});
+
 require "vendor/autoload.php";
 
 $config = (isset($argv[1])) ? require($argv[1]) : ['screen_name_list'=>['sugamasao']];
@@ -8,7 +12,7 @@ foreach($config['screen_name_list'] as $screen_name){
     try{
         $post = \Uzulla\Pplog\Crawl::get($screen_name);
     }catch(\Exception $e){
-        echo "get fail: {$screen_name}\n";
+        echo "error at {$screen_name} > cause:".$e->getMessage()."\n";
         continue;
     }
 
